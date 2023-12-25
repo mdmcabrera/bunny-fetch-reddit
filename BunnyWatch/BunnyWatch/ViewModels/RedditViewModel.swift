@@ -15,8 +15,17 @@ class RedditViewModel: ObservableObject {
     let dataFetcher = RedditDataFetcher()
     
     func fetchRedditData() async throws -> RedditModel {
-        redditData = try await dataFetcher.fetch(from: endpoint)
-        return redditData!
+        let fetchedData = try await dataFetcher.fetch(from: endpoint)
+
+        Task.detached {
+            // Ensure that the update is done on the main thread
+            DispatchQueue.main.async {
+                self.redditData = fetchedData
+            }
+        }
+
+        return fetchedData
     }
+
 }
 
