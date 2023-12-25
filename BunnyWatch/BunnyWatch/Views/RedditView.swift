@@ -18,6 +18,16 @@ struct RedditView: View {
                 if let redditData = viewModel.redditData?.data {
                     ForEach(redditData.children.indices, id: \.self) { index in
                         Text(redditData.children[index].data.title)
+                        
+                        AsyncImage(url: URL(string: redditData.children[index].data.url)) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        
+                                } placeholder: {
+                                    Color.gray
+                                }
+                                .frame(width: 250, height: 250)
                     }
                      
                 } else {
