@@ -27,7 +27,7 @@ struct RedditView: View {
                                 } placeholder: {
                                     Color.gray
                                 }
-                                .frame(width: 250, height: 250)
+                                .frame(width: 290, height: 270)
                     }
                      
                 } else {
